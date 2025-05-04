@@ -311,10 +311,9 @@ export default function Home() {
     return new File([u8arr], filename, { type: mime });
   };
 
-  const PINATA_API_KEY = "f28137359f7793770d28";
-  const PINATA_API_SECRET =
-    "550037631f761bf53ecc9b2d6be572e5b0c9fb991819b5abdb1837b2f71967b8";
-
+  const PINATA_API_KEY = import.meta.env.VITE_PINATA_API_KEY;
+  const PINATA_API_SECRET = import.meta.env.VITE_PINATA_API_SECRET;
+  
   const uploadToPinata = async (file: File, id: number): Promise<string> => {
     const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
 
