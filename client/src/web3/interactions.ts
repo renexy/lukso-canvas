@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createPublicClient, http, parseUnits } from "viem";
+import { createPublicClient, http } from "viem";
 import { lukso, luksoTestnet } from "viem/chains";
 import abi from "./abi.json"
 import ERC725 from "@erc725/erc725.js";
