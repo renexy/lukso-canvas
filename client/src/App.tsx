@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 import { getNextCanvasId, mintCanvasSc } from "./web3/interactions";
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:5000"; // Replace with your deployed server URL
+const SERVER_URL = "https://lukso-canvas-server.vercel.app/"; // Replace with your deployed server URL
 
 export default function Home() {
   const { accounts, chainId, client } = useUpProvider();
