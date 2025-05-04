@@ -15,7 +15,6 @@
  * - isSearching: Loading state indicator
  * - ready: Boolean indicating if the provider is ready
  */
-import React from 'react'
 import { createClientUPProvider } from "@lukso/up-provider";
 import { createWalletClient, custom } from "viem";
 import { lukso, luksoTestnet } from "viem/chains";
