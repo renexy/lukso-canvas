@@ -1,0 +1,39 @@
+{
+    "LSP4Metadata": {
+        "name": "Lusko Canvas",
+        "description": "A collection of canvases! Draw with your friend and receive an epic NFT together!",
+        "links": [
+            {
+                "title": "Twitter",
+                "url": "https://x.com/Kolleger4"
+            }
+        ],
+        "icon": [
+            {
+                "width": 1280,
+                "height": 720,
+                "url": "ipfs://bafybeibuvvhapt2tksrl563syrjzbltw2g2xmi6h3mdtba6mql6kfavmt4",
+                "verification": {
+                    "method": "keccak256(bytes)",
+                    "data": "0x172de7fd505dd25e8072af112f4a91e3debdc0b3bff05d04b9de0852cd795f51"
+                }
+            }
+        ],
+        "images": [ 
+            [
+                {
+                    "width": 1280,
+                    "height": 720,
+                    "url": "ipfs://bafybeibuvvhapt2tksrl563syrjzbltw2g2xmi6h3mdtba6mql6kfavmt4",
+                    "verification": {
+                        "method": "keccak256(bytes)",
+                        "data": "0x172de7fd505dd25e8072af112f4a91e3debdc0b3bff05d04b9de0852cd795f51"
+                    }
+                }
+            ]
+        ],
+        "assets": [ ],
+        "attributes": [
+        ]
+    }
+}
