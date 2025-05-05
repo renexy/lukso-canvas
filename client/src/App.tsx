@@ -12,6 +12,7 @@ import axios from "axios";
 const SERVER_URL = "https://murmuring-hamlet-29765-419f246586af.herokuapp.com"; // Replace with your deployed server URL
 
 export default function Home() {
+  const [minting, setMinting] = useState<boolean>(false);
   const { accounts, chainId, client } = useUpProvider();
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState("#000000");
@@ -313,13 +314,16 @@ export default function Home() {
 
   const PINATA_API_KEY = import.meta.env.VITE_PINATA_API_KEY;
   const PINATA_API_SECRET = import.meta.env.VITE_PINATA_API_SECRET;
-  
+
   const uploadToPinata = async (file: File, id: number): Promise<string> => {
     const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("pinataMetadata", JSON.stringify({ name: `canvas-${id}.png` }));
+    formData.append(
+      "pinataMetadata",
+      JSON.stringify({ name: `canvas-${id}.png` })
+    );
 
     try {
       const response = await fetch(url, {
@@ -365,6 +369,7 @@ export default function Home() {
       toast.error("Please connect your wallet to proceed with minting.");
       return;
     }
+    setMinting(true);
     socketRef.current.emit(
       "mint",
       { data: "mint request" },
@@ -440,7 +445,6 @@ export default function Home() {
               pinataContent: json,
             };
 
-
             const res = await axios.post(
               "https://api.pinata.cloud/pinning/pinJSONToIPFS",
               body,
@@ -455,16 +459,25 @@ export default function Home() {
 
             const ipfsUrl = `ipfs://${res.data.IpfsHash}`;
 
-            
-            await mintCanvasSc(chainId, json, ipfsUrl, client, accounts[0], response.walletAddresses[0], response.walletAddresses[1] ?? response.walletAddresses[0])
+            await mintCanvasSc(
+              chainId,
+              json,
+              ipfsUrl,
+              client,
+              accounts[0],
+              response.walletAddresses[0],
+              response.walletAddresses[1] ?? response.walletAddresses[0]
+            );
           } catch (error) {
             toast.error("Failed to upload canvas image to Pinata.");
             console.error(error);
+          } finally {
+            setMinting(false)
           }
 
           return;
         }
-
+        setMinting(false)
         toast.error("Error occurred");
         return;
       }
@@ -551,6 +564,7 @@ export default function Home() {
           )}
 
           <button
+            disabled={minting}
             onClick={() => {
               mintCanvas();
             }}

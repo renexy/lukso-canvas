@@ -3,11 +3,19 @@ import {  ERC725 } from "@erc725/erc725.js";
 import { Canvas, Canvas__factory } from "../typechain-types";
 import canvasMetadata from "../metadata/canvasMetadata.json"
 
+// const provider = new ethers.JsonRpcProvider(
+//   "https://42.rpc.thirdweb.com",
+//   {
+//     chainId: 42,
+//     name: "luksoMainnet",
+//   }
+// );
+
 const provider = new ethers.JsonRpcProvider(
-  "https://42.rpc.thirdweb.com",
+  "https://rpc.testnet.lukso.network",
   {
-    chainId: 42,
-    name: "luksoMainnet",
+    chainId: 4201,
+    name: "luksoTestnet",
   }
 );
 
@@ -15,7 +23,7 @@ const provider = new ethers.JsonRpcProvider(
 async function main() {
   try {
     // Access the private key from the Hardhat variables
-    const deployerPrivateKey = "pk";
+    const deployerPrivateKey = "0x43361a4e65f999bb2fe735d873f393763a931121a4f4ee4d775e8a3cd228a34a";
 
     // Create a wallet instance using the private key and connect it to the provider
     const deployerWallet = new ethers.Wallet(deployerPrivateKey, provider);
@@ -53,7 +61,6 @@ async function main() {
     console.error("Error deploying contract:", error);
   }
 }
-
 
 // Call the main function
 main().catch((error) => {
