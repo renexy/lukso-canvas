@@ -13,7 +13,7 @@ const SERVER_URL = "https://murmuring-hamlet-29765-419f246586af.herokuapp.com"; 
 
 export default function Home() {
   const [minting, setMinting] = useState<boolean>(false);
-  const { accounts, chainId, client } = useUpProvider();
+  const { accounts, chainId, client, contextAccounts } = useUpProvider();
   const [drawing, setDrawing] = useState(false);
   const [color, setColor] = useState("#000000");
   const [sessionCode, setSessionCode] = useState(() => {
@@ -27,6 +27,12 @@ export default function Home() {
   const socketRef = useRef<any>(null);
   const prevPositionRef = useRef({ x: 0, y: 0 });
   const isNewStrokeRef = useRef(true);
+
+  const isReady =
+    accounts &&
+    accounts.length > 0 &&
+    contextAccounts &&
+    contextAccounts.length > 0;
 
   const emitDraw = useRef(
     (
@@ -472,17 +478,28 @@ export default function Home() {
             toast.error("Failed to upload canvas image to Pinata.");
             console.error(error);
           } finally {
-            setMinting(false)
+            setMinting(false);
           }
 
           return;
         }
-        setMinting(false)
+        setMinting(false);
         toast.error("Error occurred");
         return;
       }
     );
   };
+
+  if (!isReady)
+    return (
+      <div className="flex h-screen w-full items-center justify-center">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full border-4 border-gray-300 border-t-gray-900 h-12 w-12" />
+          <p className="text-gray-500 dark:text-gray-400">Loading...</p>
+        </div>
+      </div>
+    );
+
   return (
     <div className="relative w-screen h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full z-10 flex flex-col items-center p-4 space-y-3">
