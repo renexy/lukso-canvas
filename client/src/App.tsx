@@ -60,6 +60,7 @@ export default function Home() {
   // Log component lifecycle
   useEffect(() => {
     console.log("Home component mounted");
+    clearCanvas()
     return () => {
       console.log("Home component unmounted");
       if (socketRef.current) {
