@@ -374,7 +374,7 @@ export default function Home() {
       "mint",
       { data: "mint request" },
       async (response: any) => {
-        if (response.walletAddresses && response.walletAddresses.length > 1) {
+        if (response.walletAddresses && response.walletAddresses.length > 0) {
           const canvas = canvasRef.current;
           if (!canvas) {
             toast.error("Canvas not found, cannot capture image.");
