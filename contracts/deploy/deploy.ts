@@ -23,7 +23,7 @@ const provider = new ethers.JsonRpcProvider(
 async function main() {
   try {
     // Access the private key from the Hardhat variables
-    const deployerPrivateKey = "0x43361a4e65f999bb2fe735d873f393763a931121a4f4ee4d775e8a3cd228a34a";
+    const deployerPrivateKey = "pk";
 
     // Create a wallet instance using the private key and connect it to the provider
     const deployerWallet = new ethers.Wallet(deployerPrivateKey, provider);

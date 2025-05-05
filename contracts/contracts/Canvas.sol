@@ -24,18 +24,25 @@ contract Canvas is LSP8IdentifiableDigitalAsset {
         _setData(hex"9afb95cacc9f95858ec44aa8c3b685511002e30ae54415823f406128b85b238e", metadata);
     }
 
-    function mintCanvas(bytes memory metadata, address owner1, address owner2) external payable {
-        bytes32 tokenId = bytes32(nextCanvasId);
+function mintCanvas(bytes memory metadata, address owner1, address owner2) external payable {
+    // Mint the first NFT to your address (owner1)
+    bytes32 tokenId = bytes32(nextCanvasId);
+    _mint(owner1, tokenId, true, "");
+    _setDataForTokenId(tokenId, hex"9afb95cacc9f95858ec44aa8c3b685511002e30ae54415823f406128b85b238e", metadata);
+    
+    // Increment for the next token
+    nextCanvasId++;
 
-        _mint(owner1, tokenId, true, "");
-        _setDataForTokenId(tokenId, hex"9afb95cacc9f95858ec44aa8c3b685511002e30ae54415823f406128b85b238e", metadata);
+    // Mint the second NFT to your address (owner1) as well
+    bytes32 tokenId2 = bytes32(nextCanvasId);
+    _mint(owner1, tokenId2, true, "");
+    _setDataForTokenId(tokenId2, hex"9afb95cacc9f95858ec44aa8c3b685511002e30ae54415823f406128b85b238e", metadata);
+    
+    // Transfer the second NFT to owner2
+    _transfer(owner1, owner2, tokenId2, true, "");
 
-        nextCanvasId++;
-        bytes32 tokenId2 = bytes32(nextCanvasId);
+    // Increment for the next token
+    nextCanvasId++;
+}
 
-        _mint(owner2, tokenId2, true, "");
-        _setDataForTokenId(tokenId2, hex"9afb95cacc9f95858ec44aa8c3b685511002e30ae54415823f406128b85b238e", metadata);
-
-        nextCanvasId++;
-    }
 }
